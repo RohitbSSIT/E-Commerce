@@ -18,6 +18,20 @@ export const addToCart = (event, id, stock) => {
             (curProd) => curProd.id === id
       );
 
+      if(existingProd && quantity > 1){
+            quantity = number(existingProd.quantity) + number(quantity);
+            price = number(price * quantity)
+            let updatedCart = {id,quantity,price}
+
+            updatedCart = arrLocalStorageProduct.map((curProd)=>{
+            return curProd.id === id ? updatedCart : curProd;
+      })
+             localStorage.setItem("cartProductLS", JSON.stringify(arrLocalStorageProduct));
+      
+
+      }
+
+      
       if(existingProd){
             return false;
       }
